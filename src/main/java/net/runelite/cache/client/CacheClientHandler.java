@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Adam <Adam@sigterm.info>
+ * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,15 +22,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.cache.updater.beans;
+package net.runelite.cache.client;
 
-import java.time.Instant;
-import lombok.Data;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Data
-public class CacheEntry
+public class CacheClientHandler extends ChannelInboundHandlerAdapter
 {
-	private int id;
-	private int revision;
-	private Instant date;
+	private static final Logger logger = LoggerFactory.getLogger(CacheClientHandler.class);
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception
+	{
+		logger.warn("Channel has gone inactive");
+	}
+
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
+	{
+		// Close the connection when an exception is raised.
+		logger.warn(null, cause);
+		ctx.close();
+	}
 }

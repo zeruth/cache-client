@@ -1,2 +1,2 @@
-rootProject.name = "cache-updater"
+rootProject.name = "cache-client"
 

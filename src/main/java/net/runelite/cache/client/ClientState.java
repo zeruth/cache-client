@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Adam <Adam@sigterm.info>
+ * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,15 +22,10 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.cache.updater.beans;
+package net.runelite.cache.client;
 
-import lombok.Data;
-
-@Data
-public class FileEntry
+public enum ClientState
 {
-	private int id;
-	private int archiveId;
-	private int fileId;
-	private int nameHash;
+	HANDSHAKING,
+	CONNECTED
 }
