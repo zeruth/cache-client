@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
+ * Copyright (c) 2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,71 +22,17 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.cache.client;
+package net.runelite.cache.updater.beans;
 
-import java.io.IOException;
-import net.runelite.cache.fs.Container;
+import lombok.Data;
 
-public class FileResult
+@Data
+public class ArchiveEntry
 {
-	private final int index;
-	private final int fileId;
-	private final byte[] compressedData;
-
-	private byte[] contents;
-	private int revision;
+	private int id;
+	private int archiveId;
+	private int nameHash;
 	private int crc;
-	private int compression; // compression method used by archive data
-
-	public FileResult(int index, int fileId, byte[] compressedData)
-	{
-		this.index = index;
-		this.fileId = fileId;
-		this.compressedData = compressedData;
-	}
-
-	public int getIndex()
-	{
-		return index;
-	}
-
-	public int getFileId()
-	{
-		return fileId;
-	}
-
-	public byte[] getCompressedData()
-	{
-		return compressedData;
-	}
-
-	public void decompress(int[] keys) throws IOException
-	{
-		Container res = Container.decompress(compressedData, keys);
-
-		contents = res.data;
-		revision = res.revision;
-		crc = res.crc;
-		compression = res.compression;
-	}
-
-	public byte[] getContents()
-	{
-		return contents;
-	}
-
-	public int getRevision()
-	{
-		return revision;
-	}
-
-	public int getCrc()
-	{
-		return crc;
-	}
-
-	public int getCompression()
-	{
-		return compression;
-	}
+	private int revision;
+	private byte[] hash;
 }

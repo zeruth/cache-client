@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
+ * Copyright (c) 2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,12 +22,15 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.cache.client;
+package net.runelite.cache.updater.beans;
 
-import net.runelite.cache.fs.Archive;
+import lombok.Data;
 
-@FunctionalInterface
-public interface DownloadWatcher
+@Data
+public class IndexEntry
 {
-	void downloadComplete(Archive archive, byte[] data);
+	private int id;
+	private int indexId;
+	private int crc;
+	private int revision;
 }

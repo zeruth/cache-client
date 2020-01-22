@@ -46,12 +46,16 @@ dependencies {
 
     compileOnly("org.projectlombok:lombok:1.18.10")
 
-    implementation("com.google.guava:guava:28.2-jre")
-    implementation("org.slf4j:slf4j-api:1.7.30")
-    implementation("io.netty:netty-all:4.1.44.Final")
-    implementation("com.openosrs:protocol:1.0-SNAPSHOT")
+    implementation("io.minio:minio:6.0.11")
+    implementation("mysql:mysql-connector-java:8.0.18")
+    implementation("org.springframework.boot:spring-boot-devtools:2.2.2.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter:2.2.2.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc:2.2.2.RELEASE")
+    implementation("org.sql2o:sql2o:1.6.0")
+    implementation("com.openosrs:cache-client:1.0-SNAPSHOT")
     implementation("com.openosrs:protocol-api:1.0-SNAPSHOT")
     implementation("com.openosrs:cache:187.0-SNAPSHOT")
+    implementation("com.openosrs:http-api:1.6.3-SNAPSHOT")
 }
 
 configure<JavaPluginConvention> {
@@ -61,13 +65,6 @@ configure<JavaPluginConvention> {
 tasks {
     compileJava {
         options.encoding = "UTF-8"
-    }
-    register<JavaExec>("download") {
-        dependsOn(":cache-client:build")
-
-        classpath = project.sourceSets.main.get().runtimeClasspath
-        main = "net.runelite.cache.client.CacheClient"
-        args(listOf(rsversion))
     }
 }
 
